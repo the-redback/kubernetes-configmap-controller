@@ -15,10 +15,11 @@ import (
 	"os"
 	"Onboarding/Kube-ConfigMap-Watcher/pkg"
 	"reflect"
+	"fmt"
 )
 
 func main() {
-	runOutsideCluster := flag.Bool("run-outside-cluster", true, "Set this flag when running outside of the cluster.")
+	runOutsideCluster := flag.Bool("run-outside-cluster", false, "Set this flag when running outside of the cluster.")
 	flag.Parse()
 
 	// creates the connection
@@ -86,6 +87,8 @@ func main() {
 
 func newClientSet(runOutsideCluster bool) (*kubernetes.Clientset, error) {
 	kubeConfigLocation := ""
+
+	fmt.Println(">>>>>>>>>>>>>>..", runOutsideCluster)
 
 	if runOutsideCluster == true {
 		homeDir := os.Getenv("HOME")

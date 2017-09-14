@@ -88,7 +88,6 @@ func main() {
 func newClientSet(runOutsideCluster bool) (*kubernetes.Clientset, error) {
 	kubeConfigLocation := ""
 
-	fmt.Println(">>>>>>>>>>>>>>..", runOutsideCluster)
 
 	if runOutsideCluster == true {
 		homeDir := os.Getenv("HOME")

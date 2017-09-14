@@ -15,7 +15,6 @@ import (
 	"os"
 	"Onboarding/Kube-ConfigMap-Watcher/pkg"
 	"reflect"
-	"fmt"
 )
 
 func main() {
@@ -69,7 +68,7 @@ func main() {
 	controller := pkg.NewController(queue, indexer, informer)
 
 	// We can now warm up the cache for initial synchronization.
-	indexer.Add(&v1.Pod{
+	indexer.Add(&v1.ConfigMap{
 		ObjectMeta: meta_v1.ObjectMeta{
 			Name:      "myConfigMap",
 			Namespace: v1.NamespaceDefault,
@@ -87,7 +86,6 @@ func main() {
 
 func newClientSet(runOutsideCluster bool) (*kubernetes.Clientset, error) {
 	kubeConfigLocation := ""
-
 
 	if runOutsideCluster == true {
 		homeDir := os.Getenv("HOME")
